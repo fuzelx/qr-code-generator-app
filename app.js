@@ -8,8 +8,7 @@ generateBtn.addEventListener('click', generateQRCode);
 function generateQRCode() {
     const text = qrText.value;
     if (text) {
-        qrCodeDiv.innerHTML = ''; // Clear previous QR codes
-        downloadLink.style.display = 'none';
+        qrCodeDiv.innerHTML = '';
 
         const qrCode = new QRCode(qrCodeDiv, {
             text: text,
@@ -18,9 +17,12 @@ function generateQRCode() {
         });
 
         const qrCodeImage = qrCodeDiv.querySelector('img');
-        qrCodeImage.onload = () => {
-            downloadLink.href = qrCodeImage.src;
-            downloadLink.style.display = 'block';
-        };
+
+        // Set the download link attributes
+        downloadLink.href = qrCodeImage.src;
+        downloadLink.download = 'qrcode.png';
+
+        // Show the download link
+        downloadLink.style.display = 'block';
     }
 }
